@@ -1,0 +1,1 @@
+export const HOST_SCOND = "http://localhost:8080"
