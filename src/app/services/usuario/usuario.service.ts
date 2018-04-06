@@ -6,10 +6,12 @@ import { Usuario } from '../../model/usuario';
 
 @Injectable()
 export class UsuarioService {
-  
+
   constructor(private http: HttpClient) {}
 
   login(usuario: Usuario){
+    alert(usuario.dsLogin);
+    alert(usuario.dsSenha);
     return this.http.post(`${HOST_SCOND}/api/auth`, usuario);
   }
 

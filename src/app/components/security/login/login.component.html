@@ -3,36 +3,35 @@
 </div>
 
 <div class="page-content container">
-        
-  <div class="row">        
+
+  <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <form #form="ngForm" (ngSubmit)="login()" novalidate>
             <div class="login-wrapper">
-                <div class="box">                
+                <div class="box">
                     <div class="content-wrap">
-                        <h6>S.Con.D</h6>
-                    
-                        
-                        <input type="text" 
+                        <h6>S.Con.D</h6>                    
+
+                        <input type="text"
                         [(ngModel)]="usuario.dsLogin"
-                               name="login" 
-                              class="form-control" 
-                                 id="inputLogin" 
+                               name="login"
+                              class="form-control"
+                                 id="inputLogin"
                         placeholder="Informe seu Login"
                              #dsLogin="ngModel" required>
 
-                        <input type="password" 
+                        <input type="password"
                         [(ngModel)]="usuario.dsPassword"
-                            name="password" 
-                            class="form-control" 
-                                id="inputPassword" 
+                            name="password"
+                            class="form-control"
+                                id="inputPassword"
                         placeholder="Informe sua Senha"
                         #dsPassword="ngModel" required>
 
-                    
-                        <div class="action">                           
+
+                        <div class="action">
                             <button type="submit" [disabled]="!form.valid" class="btn btn-primary signup">Entrar</button>
-                        </div>                
+                        </div>
                     </div>
                 </div>
 
@@ -41,8 +40,7 @@
                     <a href="signup.html">Cadastre-se</a>
                 </div>
             </div>
-        </form>        
+        </form>
     </div>
   </div>
 </div>
-

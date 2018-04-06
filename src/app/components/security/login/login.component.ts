@@ -16,14 +16,15 @@ export class LoginComponent implements OnInit {
   shared: SharedService;
   message: string;
 
-  constructor(private usuarioService: UsuarioService, 
+  constructor(private usuarioService: UsuarioService,
               private router: Router){
-    this.shared = SharedService.getInstance();  
+    this.shared = SharedService.getInstance();
   }
 
-  login(){    
+  login(){
     this.message = '';
     this.usuarioService.login(this.usuario).subscribe((userAuthentication: CurrentUser) => {
+        alert(userAuthentication.token);
         this.shared.token = userAuthentication.token;
         this.shared.usuario = userAuthentication.usuario;
         this.shared.usuario.dsPerfil = this.shared.usuario.dsPerfil.substring(5);
