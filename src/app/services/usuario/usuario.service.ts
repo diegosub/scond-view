@@ -10,8 +10,6 @@ export class UsuarioService {
   constructor(private http: HttpClient) {}
 
   login(usuario: Usuario){
-    alert(usuario.dsLogin);
-    alert(usuario.dsSenha);
     return this.http.post(`${HOST_SCOND}/api/auth`, usuario);
   }
 
@@ -35,4 +33,6 @@ export class UsuarioService {
   delete(idUsuario: number){
     return this.http.delete(`${HOST_SCOND}/api/usuario/${idUsuario}`);
   }
+
+  //METODO QUE VALIDA O TOKEN DO USUARIO
 }

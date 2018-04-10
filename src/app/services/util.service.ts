@@ -1,23 +1,22 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SharedService {
+export class UtilService {
 
-  public static instance: SharedService = null;
+  public static instance: UtilService = null;
 
   constructor() {
-    return SharedService.instance = SharedService.instance || this;
+    return UtilService.instance = UtilService.instance || this;
   }
 
   public static getInstance(){
     if(this.instance == null){
-      this.instance = new SharedService();
+      this.instance = new UtilService();
     }
     return this.instance;
   }
 
   isLoggedIn():boolean {
-    alert("chegou");
     if(localStorage.getItem("usuario") == null){
       return false;
     } else {
