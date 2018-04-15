@@ -5,27 +5,27 @@ import { Categoria } from '../../../model/categoria';
 import { ResponseApi } from '../../../model/response-api';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Base } from '../../base/base';
 
 @Component({
   selector: 'app-categoria-form',
   templateUrl: './categoria-form.component.html',
   styleUrls: ['./categoria-form.component.css']
 })
-export class CategoriaFormComponent implements OnInit {
+export class CategoriaFormComponent extends Base {
 
   @ViewChild("form")
   form: NgForm;
 
   categoria = new Categoria(null,'');
-  message : {};
-  classCss : {};
-  acao: string;
 
   public loading = false;
 
   constructor(private route: ActivatedRoute,
               private spinnerService: Ng4LoadingSpinnerService,
-              private categoriaService: CategoriaService) {}
+              private categoriaService: CategoriaService) {
+        super();
+  }
 
   ngOnInit() {
     let id : string = this.route.snapshot.params['id'];
@@ -59,25 +59,6 @@ export class CategoriaFormComponent implements OnInit {
     });
   }
 
-  getFormGroupClass(isInvalid: boolean, isDirty:boolean): {} {
-    return {
-      'form-group': true,
-      'has-error' : isInvalid  && isDirty,
-      'has-success' : !isInvalid  && isDirty
-    };
-  }
 
-  private showMessage(message: {type: string, text: string}): void {
-      this.message = message;
-      this.buildClasses(message.type);
-
-  }
-
-  private buildClasses(type: string): void {
-     this.classCss = {
-       'alert': true
-     }
-     this.classCss['alert-'+type] =  true;
-  }
 
 }

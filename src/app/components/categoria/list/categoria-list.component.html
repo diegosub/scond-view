@@ -1,22 +1,73 @@
 <fieldset>
 	<legend>Categoria - Pesquisar</legend>
   <div class="panel-body">
+
+		<div [ngClass]="classCss" role="alert" *ngIf="message">
+	    <strong>{{ message.text }}</strong>
+	  </div>
+
 		<form action="">
   		<fieldset>
   			<div class="form-group" style="width:60%">
   				<label>Descrição</label>
-  				<input class="form-control" placeholder="Informe a descrição da categoria" type="text">
+					<input type="text"
+										[(ngModel)]="categoriaFilter.dsCategoria"
+										name="dsCategoria"
+										class="form-control"
+										id="inputDsCategoria"
+										placeholder="Informe a descrição da categoria"
+										#dsCategoria="ngModel"
+										required>
   			</div>
       </fieldset>
     </form>
   </div>
 </fieldset>
 
-<div>
-  <button type="submit" class="btn btn-primary">
+<div style="padding-left:15px;">
+  <button type="submit" class="btn btn-primary" (click) = "pesquisar()">
 		Pesquisar
 	</button>
   <button class="btn btn-primary" [routerLink]="['/categoria-form']">
 		Novo
 	</button>
+</div>
+
+<div class="panel-body">
+  <table class="table table-responsive table-striped table-bordered table-hover no-margin">
+    <tr>
+      <th style="width: 6%; text-align:center;">Código</th>
+      <th style="text-align:center;">Descrição</th>
+			<th style="width: 20%;">Situação</th>
+      <th style="width: 10px;">&nbsp;</th>
+      <th style="width: 10px;">&nbsp;</th>
+      <th style="width: 10px;">&nbsp;</th>
+    </tr>
+    <tr *ngFor="let categoria of listaCategoria">
+      <td style="text-align:right;">{{categoria.idCategoria}}</td>
+      <td>{{categoria.dsCategoria}}</td>
+			<td *ngIf="categoria.fgAtivo == 'S'" style="color: green;">Ativo</td>
+			<td *ngIf="categoria.fgAtivo == 'N'" style="color: red;">Inativo</td>
+
+      <td>
+        <img src="assets/img/ativar.png" style="width:18px; height: 18px;"/>
+      </td>
+      <td>
+          <a href="#"><img src="assets/img/edit.png" style="width:18px; height: 18px;" /></a>
+      </td>
+      <td>
+				<img *ngIf="categoria.fgAtivo == 'S'" src="assets/img/remove.png" (click)="inativar(categoria.idCategoria)" style="width:18px; height: 18px; cursor: pointer;"/>
+				<img *ngIf="categoria.fgAtivo == 'N'" src="assets/img/ativar.png" (click)="ativar(categoria.idCategoria)" style="width:18px; height: 18px; cursor: pointer;"/>
+			</td>
+    </tr>
+  </table>
+</div>
+<div class="box-footer clearfix">
+  <ul class="pagination pagination-sm no-margin pull-right">
+    <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+    <li *ngFor="let p of pages; let i=index">
+        <a [ngClass]="{'pagination-focus':i==page}"  href="" (click)="setPage(i,$event)">{{i+1}}</a>
+    </li>
+    <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+  </ul>
 </div>

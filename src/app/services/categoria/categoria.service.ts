@@ -23,4 +23,10 @@ export class CategoriaService {
     return this.http.get(`${HOST_SCOND}/api/categoria/${page}/${count}`);
   }
 
+  ativarInativar(id:string, status:string){
+    alert(id);
+    alert(status);
+    return this.http.delete(`${HOST_SCOND}/api/categoria/${id}/${status}`);
+  }
+
 }
