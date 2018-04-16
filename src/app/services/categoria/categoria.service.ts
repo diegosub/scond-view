@@ -10,7 +10,7 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) {}
 
-  createOrUpdate(categoria: Categoria){
+  createOrUpdate(categoria: Categoria) {
     if(categoria.idCategoria != null && categoria.idCategoria > 0){
       return this.http.put(`${HOST_SCOND}/api/categoria`, categoria);
     } else {
@@ -19,13 +19,15 @@ export class CategoriaService {
     }
   }
 
-  findAll(page: number, count: number){
+  findAll(page: number, count: number) {
     return this.http.get(`${HOST_SCOND}/api/categoria/${page}/${count}`);
   }
 
-  ativarInativar(id:string, status:string){
-    alert(id);
-    alert(status);
+  get(id: string) {
+    return this.http.get(`${HOST_SCOND}/api/categoria/${id}`);
+  }
+
+  ativarInativar(id:string, status:string) {    
     return this.http.delete(`${HOST_SCOND}/api/categoria/${id}/${status}`);
   }
 

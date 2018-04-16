@@ -8,12 +8,18 @@ import { TemplateComponent } from './template/template.component';
 import { HomeComponent } from '../home/home.component';
 import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
 import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
+import { CategoriaViewComponent } from '../categoria/view/categoria-view.component';
 import { FormsModule } from '@angular/forms';
 import { DialogService } from '../../dialog-service';
 import { CategoriaService } from '../../services/categoria/categoria.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../security/auth.interceptor';
 import { LoadingModule } from 'ngx-loading';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@angular/material';
+
+
 
 @NgModule({
     exports: [
@@ -27,7 +33,14 @@ import { LoadingModule } from 'ngx-loading';
         FormsModule,
         HttpClientModule,
         LoadingModule,
-        CommonModule
+        CommonModule,
+BrowserAnimationsModule,
+        MatToolbarModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule
     ],
     declarations: [
         FooterComponent,
@@ -35,7 +48,8 @@ import { LoadingModule } from 'ngx-loading';
         HeaderComponent,
         HomeComponent,
         CategoriaListComponent,
-        CategoriaFormComponent
+        CategoriaFormComponent,
+        CategoriaViewComponent
     ],
     providers: [
       DialogService,

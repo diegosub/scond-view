@@ -4,11 +4,14 @@ import { ModuleWithProviders } from '@angular/core';
 import { AuthGuard } from '../security/auth.guard';
 import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
 import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
+import { CategoriaViewComponent } from '../categoria/view/categoria-view.component';
 
 export const CONTENT_ROUTES: Routes = [
 
         { path : '', component: HomeComponent, canActivate: [AuthGuard] },
         { path : 'categoria-list', component: CategoriaListComponent, canActivate: [AuthGuard] },
-        { path : 'categoria-form', component: CategoriaFormComponent, canActivate: [AuthGuard] }
+        { path : 'categoria-form', component: CategoriaFormComponent, canActivate: [AuthGuard] },
+        { path : 'categoria-form/:id', component: CategoriaFormComponent, canActivate: [AuthGuard] },
+        { path : 'categoria-view/:id', component: CategoriaViewComponent, canActivate: [AuthGuard] }
 
 ]

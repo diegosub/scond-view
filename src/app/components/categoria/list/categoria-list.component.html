@@ -50,10 +50,11 @@
 			<td *ngIf="categoria.fgAtivo == 'N'" style="color: red;">Inativo</td>
 
       <td>
-        <img src="assets/img/ativar.png" style="width:18px; height: 18px;"/>
+				
+				<img src="assets/img/visualizar.png" (click)="visualizar(categoria.idCategoria)" style="width:18px; height: 18px; cursor: pointer;"/>
       </td>
       <td>
-          <a href="#"><img src="assets/img/edit.png" style="width:18px; height: 18px;" /></a>
+        <img src="assets/img/edit.png" (click)="editar(categoria.idCategoria)" style="width:18px; height: 18px; cursor: pointer;" />
       </td>
       <td>
 				<img *ngIf="categoria.fgAtivo == 'S'" src="assets/img/remove.png" (click)="inativar(categoria.idCategoria)" style="width:18px; height: 18px; cursor: pointer;"/>

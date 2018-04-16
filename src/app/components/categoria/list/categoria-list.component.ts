@@ -6,6 +6,8 @@ import { Categoria } from '../../../model/categoria';
 import { Base } from '../../base/base';
 import { ResponseApi } from '../../../model/response-api';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CategoriaViewComponent } from '../view/categoria-view.component';
+import { MatDialog, MatDialogConfig } from "@angular/material";
 
 @Component({
   selector: 'app-categoria-list',
@@ -19,7 +21,9 @@ export class CategoriaListComponent extends Base {
   listaCategoria=[];
 
   constructor(private dialogService: DialogService,
+              private route: ActivatedRoute,
               private router: Router,
+              private dialog: MatDialog,
               private spinnerService: Ng4LoadingSpinnerService,
               private categoriaService: CategoriaService) {
 	  super();
@@ -27,6 +31,11 @@ export class CategoriaListComponent extends Base {
 
   ngOnInit() {
     this.findAll(this.page,this.count);
+  }
+
+  visualizar(id) {
+    this.dialog.open(CategoriaViewComponent, {height: '350px',
+                                               width: '800px', data: {id: id}});
   }
 
   findAll(page:number,count:number){
@@ -46,6 +55,7 @@ export class CategoriaListComponent extends Base {
   }
 
   inativar(id:string){
+    this.spinnerService.show();
     this.dialogService.confirm('Tem certeza que deseja inativar esta categoria?')
       .then((candelete:boolean) => {
           if(candelete){
@@ -54,20 +64,23 @@ export class CategoriaListComponent extends Base {
             this.categoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
                 this.showMessage({
                   type: 'success',
-                  text: `O registro foi removido do sistema com sucesso.`
+                  text: `O registro foi inativado com sucesso.`
                 });
                 this.findAll(this.page,this.count);
+                this.spinnerService.hide();
             } , err => {
               this.showMessage({
                 type: 'error',
                 text: err['error']['errors'][0]
               });
+              this.spinnerService.hide();
             });
           }
       });
   }
 
   ativar(id:string){
+    this.spinnerService.show();
     this.dialogService.confirm('Tem certeza que deseja ativar esta categoria?')
       .then((candelete:boolean) => {
           if(candelete){
@@ -79,40 +92,21 @@ export class CategoriaListComponent extends Base {
                   text: `O registro foi ativado com sucesso.`
                 });
                 this.findAll(this.page,this.count);
+                this.spinnerService.hide();
             } , err => {
               this.showMessage({
                 type: 'error',
                 text: err['error']['errors'][0]
               });
+              this.spinnerService.hide();
             });
           }
       });
   }
 
-  edit(id:string){
-    this.router.navigate(['/user-new',id]);
+  editar(id:string){
+    this.router.navigate(['/categoria-form',id]);
   }
-
-  // delete(id:string){
-  //   this.dialogService.confirm('Do you want to delete the email ?')
-  //     .then((candelete:boolean) => {
-  //         if(candelete){
-  //           this.message = {};
-  //           this.categoriaService.delete(id).subscribe((responseApi:ResponseApi) => {
-  //               this.showMessage({
-  //                 type: 'success',
-  //                 text: `Record deleted`
-  //               });
-  //               this.findAll(this.page,this.count);
-  //           } , err => {
-  //             this.showMessage({
-  //               type: 'error',
-  //               text: err['error']['errors'][0]
-  //             });
-  //           });
-  //         }
-  //     });
-  // }
 
   setNextPage(event:any){
     event.preventDefault();
