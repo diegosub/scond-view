@@ -17,7 +17,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 
 export class CategoriaListComponent extends Base {
 
-  categoriaFilter = new Categoria(null,'');
+  categoriaFilter = new Categoria(null,'','');
   listaCategoria=[];
 
   constructor(private dialogService: DialogService,
@@ -31,11 +31,27 @@ export class CategoriaListComponent extends Base {
 
   ngOnInit() {
     this.findAll(this.page,this.count);
+    this.categoriaFilter.fgAtivo = 'T';
   }
 
   visualizar(id) {
     this.dialog.open(CategoriaViewComponent, {height: '350px',
                                                width: '800px', data: {id: id}});
+  }
+
+  pesquisar(): void {
+    this.categoriaService.pesquisar(this.page,this.count,this.categoriaFilter)
+    .subscribe((responseApi:ResponseApi) => {
+      this.categoriaFilter.dsCategoria = this.categoriaFilter.dsCategoria == 'uninformed' ? "" : this.categoriaFilter.dsCategoria;
+      this.categoriaFilter.fgAtivo = this.categoriaFilter.fgAtivo == 'uniformed' ? "" : this.categoriaFilter.fgAtivo;
+      this.listaCategoria = responseApi['data']['content'];
+        this.pages = new Array(responseApi['data']['totalPages']);
+    } , err => {
+      this.showMessage({
+        type: 'error',
+        text: err['error']['errors'][0]
+      });
+    });
   }
 
   findAll(page:number,count:number){
@@ -51,7 +67,6 @@ export class CategoriaListComponent extends Base {
       });
       this.spinnerService.hide();
     });
-
   }
 
   inativar(id:string){

@@ -14,7 +14,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class CategoriaViewComponent extends Base {
 
-  categoria = new Categoria(null,'');
+  categoria = new Categoria(null,'','');
 
   constructor(private route: ActivatedRoute,
               private dialogRef: MatDialogRef<CategoriaViewComponent>,

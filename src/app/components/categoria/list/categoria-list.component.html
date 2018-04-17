@@ -19,6 +19,15 @@
 										#dsCategoria="ngModel"
 										required>
   			</div>
+
+				<div class="form-group" style="width:60%">
+  				<label>Situação </label>
+					&nbsp;
+					<input name="situacao" type="radio" value='T'  [(ngModel)]="categoriaFilter.fgAtivo" >Todos&nbsp;
+					<input name="situacao" type="radio" value='S'  [(ngModel)]="categoriaFilter.fgAtivo" >Ativos&nbsp;
+					<input name="situacao" type="radio" value='N'  [(ngModel)]="categoriaFilter.fgAtivo" >Inativos&nbsp;
+  			</div>
+
       </fieldset>
     </form>
   </div>
@@ -50,7 +59,7 @@
 			<td *ngIf="categoria.fgAtivo == 'N'" style="color: red;">Inativo</td>
 
       <td>
-				
+
 				<img src="assets/img/visualizar.png" (click)="visualizar(categoria.idCategoria)" style="width:18px; height: 18px; cursor: pointer;"/>
       </td>
       <td>

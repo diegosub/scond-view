@@ -19,6 +19,13 @@ export class CategoriaService {
     }
   }
 
+  pesquisar(page:number, count:number, c:Categoria){
+    alert(c.dsCategoria);
+    alert(c.fgAtivo);
+    c.dsCategoria = (c.dsCategoria == '') ? 'uninformed' : c.dsCategoria;    
+    return this.http.get(`${HOST_SCOND}/api/categoria/${page}/${count}/${c.dsCategoria}/${c.fgAtivo}`);
+  }
+
   findAll(page: number, count: number) {
     return this.http.get(`${HOST_SCOND}/api/categoria/${page}/${count}`);
   }
@@ -27,7 +34,7 @@ export class CategoriaService {
     return this.http.get(`${HOST_SCOND}/api/categoria/${id}`);
   }
 
-  ativarInativar(id:string, status:string) {    
+  ativarInativar(id:string, status:string) {
     return this.http.delete(`${HOST_SCOND}/api/categoria/${id}/${status}`);
   }
 
