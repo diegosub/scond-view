@@ -27,7 +27,7 @@
 	  <button type="submit" [disabled]="!form.valid" class="btn btn-primary">
 			{{acao}}
 		</button>
-	  <button class="btn btn-default" [routerLink]="['/categoria-list']">
+	  <button class="btn btn-default" (click)="cancelar()">
 			Cancelar
 		</button>
 	</div>

@@ -8,6 +8,8 @@ import { ResponseApi } from '../../../model/response-api';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CategoriaViewComponent } from '../view/categoria-view.component';
 import { MatDialog, MatDialogConfig } from "@angular/material";
+import { PagerService } from '../../../services/page.service';
+
 
 @Component({
   selector: 'app-categoria-list',
@@ -17,12 +19,18 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 
 export class CategoriaListComponent extends Base {
 
+  // pager object
+  pager: any = {};
+
+  // paged items
+  pagedItems: any[];
+
   categoriaFilter = new Categoria(null,'','');
-  listaCategoria=[];
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
               private router: Router,
+              private pagerService: PagerService,
               private dialog: MatDialog,
               private spinnerService: Ng4LoadingSpinnerService,
               private categoriaService: CategoriaService) {
@@ -30,8 +38,8 @@ export class CategoriaListComponent extends Base {
   }
 
   ngOnInit() {
-    this.findAll(this.page,this.count);
     this.categoriaFilter.fgAtivo = 'T';
+    this.pesquisar();
   }
 
   visualizar(id) {
@@ -40,28 +48,18 @@ export class CategoriaListComponent extends Base {
   }
 
   pesquisar(): void {
-    this.categoriaService.pesquisar(this.page,this.count,this.categoriaFilter)
-    .subscribe((responseApi:ResponseApi) => {
-      this.categoriaFilter.dsCategoria = this.categoriaFilter.dsCategoria == 'uninformed' ? "" : this.categoriaFilter.dsCategoria;
-      this.categoriaFilter.fgAtivo = this.categoriaFilter.fgAtivo == 'uniformed' ? "" : this.categoriaFilter.fgAtivo;
-      this.listaCategoria = responseApi['data']['content'];
-        this.pages = new Array(responseApi['data']['totalPages']);
+    this.spinnerService.show();
+    this.categoriaService.pesquisar(this.categoriaFilter)
+    .subscribe((responseApi:ResponseApi) => {    
+      this.lista = responseApi['data'];
+      if(this.lista.length > 0) {
+        this.setPage(1);
+      }else{
+        this.pagedItems = [];
+      }
+      this.spinnerService.hide();
     } , err => {
       this.showMessage({
-        type: 'error',
-        text: err['error']['errors'][0]
-      });
-    });
-  }
-
-  findAll(page:number,count:number){
-    this.spinnerService.show();
-    this.categoriaService.findAll(page,count).subscribe((responseApi:ResponseApi) => {
-        this.listaCategoria = responseApi['data']['content'];
-        this.pages = new Array(responseApi['data']['totalPages']);
-        this.spinnerService.hide();
-    } , err => {
-      super.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
@@ -81,7 +79,14 @@ export class CategoriaListComponent extends Base {
                   type: 'success',
                   text: `O registro foi inativado com sucesso.`
                 });
-                this.findAll(this.page,this.count);
+
+                //ATUALIZANDO STATUS
+                this.lista.forEach(function (value) {
+                  if(value.idCategoria == id) {
+                    value.fgAtivo = 'N';
+                  }
+                });
+
                 this.spinnerService.hide();
             } , err => {
               this.showMessage({
@@ -106,7 +111,14 @@ export class CategoriaListComponent extends Base {
                   type: 'success',
                   text: `O registro foi ativado com sucesso.`
                 });
-                this.findAll(this.page,this.count);
+
+                //ATUALIZANDO STATUS
+                this.lista.forEach(function (value) {
+                  if(value.idCategoria == id) {
+                    value.fgAtivo = 'S';
+                  }
+                });
+
                 this.spinnerService.hide();
             } , err => {
               this.showMessage({
@@ -123,26 +135,13 @@ export class CategoriaListComponent extends Base {
     this.router.navigate(['/categoria-form',id]);
   }
 
-  setNextPage(event:any){
-    event.preventDefault();
-    if(this.page+1 < this.pages.length){
-      this.page =  this.page +1;
-      this.findAll(this.page,this.count);
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+        return;
     }
-  }
 
-  setPreviousPage(event:any){
-    event.preventDefault();
-    if(this.page > 0){
-      this.page =  this.page - 1;
-      this.findAll(this.page,this.count);
-    }
-  }
-
-  setPage(i,event:any){
-    event.preventDefault();
-    this.page = i;
-    this.findAll(this.page,this.count);
+    this.pager = this.pagerService.getPager(this.lista.length, page);
+    this.pagedItems = this.lista.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 }

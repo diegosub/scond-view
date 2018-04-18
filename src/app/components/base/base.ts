@@ -4,18 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class Base implements OnInit {
 
-  page:number=0;
-  count:number=5;
-  pages:Array<number>;
   message : {};
   classCss : {};
 
   acao: string;
 
+  lista = [];
+
   constructor() {}
 
   ngOnInit(): void {
-    
+
   }
 
   getFormGroupClass(isInvalid: boolean, isDirty:boolean): {} {
@@ -29,6 +28,9 @@ export class Base implements OnInit {
   showMessage(message: {type: string, text: string}): void {
     this.message = message;
     this.buildClasses(message.type);
+    setTimeout(() => {
+      this.message = undefined;
+    }, 5000);
   }
 
   buildClasses(type: string): void {

@@ -12,6 +12,7 @@ import { CategoriaViewComponent } from '../categoria/view/categoria-view.compone
 import { FormsModule } from '@angular/forms';
 import { DialogService } from '../../dialog-service';
 import { CategoriaService } from '../../services/categoria/categoria.service';
+import { PagerService } from '../../services/page.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../security/auth.interceptor';
 import { LoadingModule } from 'ngx-loading';
@@ -34,13 +35,13 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenu
         HttpClientModule,
         LoadingModule,
         CommonModule,
-BrowserAnimationsModule,
+        BrowserAnimationsModule,
         MatToolbarModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule
     ],
     declarations: [
         FooterComponent,
@@ -53,6 +54,7 @@ BrowserAnimationsModule,
     ],
     providers: [
       DialogService,
+      PagerService,
       CategoriaService,
       {
         provide: HTTP_INTERCEPTORS,

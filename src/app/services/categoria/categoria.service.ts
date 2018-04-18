@@ -19,15 +19,8 @@ export class CategoriaService {
     }
   }
 
-  pesquisar(page:number, count:number, c:Categoria){
-    alert(c.dsCategoria);
-    alert(c.fgAtivo);
-    c.dsCategoria = (c.dsCategoria == '') ? 'uninformed' : c.dsCategoria;    
-    return this.http.get(`${HOST_SCOND}/api/categoria/${page}/${count}/${c.dsCategoria}/${c.fgAtivo}`);
-  }
-
-  findAll(page: number, count: number) {
-    return this.http.get(`${HOST_SCOND}/api/categoria/${page}/${count}`);
+  pesquisar(categoria:Categoria){
+    return this.http.post(`${HOST_SCOND}/api/categoria/pesquisar`, categoria);
   }
 
   get(id: string) {

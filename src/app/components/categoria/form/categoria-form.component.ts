@@ -6,6 +6,7 @@ import { ResponseApi } from '../../../model/response-api';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Base } from '../../base/base';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-categoria-form',
@@ -23,6 +24,7 @@ export class CategoriaFormComponent extends Base {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
+              private _location: Location,
               private spinnerService: Ng4LoadingSpinnerService,
               private categoriaService: CategoriaService) {
         super();
@@ -77,6 +79,8 @@ export class CategoriaFormComponent extends Base {
     });
   }
 
-
+  cancelar() {
+    this._location.back();
+  }
 
 }
