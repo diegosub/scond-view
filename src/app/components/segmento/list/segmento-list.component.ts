@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../../../dialog-service';
-import { CategoriaService } from '../../../services/categoria/categoria.service';
-import { Categoria } from '../../../model/categoria';
+import { SegmentoService } from '../../../services/segmento/segmento.service';
+import { Segmento } from '../../../model/segmento';
 import { Base } from '../../base/base';
 import { ResponseApi } from '../../../model/response-api';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { CategoriaViewComponent } from '../view/categoria-view.component';
+import { SegmentoViewComponent } from '../view/segmento-view.component';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { PagerService } from '../../../services/page.service';
 
 
 @Component({
-  selector: 'app-categoria-list',
-  templateUrl: './categoria-list.component.html',
-  styleUrls: ['./categoria-list.component.css']
+  selector: 'app-segmento-list',
+  templateUrl: './segmento-list.component.html',
+  styleUrls: ['./segmento-list.component.css']
 })
 
-export class CategoriaListComponent extends Base {
+export class SegmentoListComponent extends Base {
 
-  categoriaFilter = new Categoria(null,'','','','','');
+  segmentoFilter = new Segmento(null,'',null,'','','','');
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
@@ -27,23 +27,23 @@ export class CategoriaListComponent extends Base {
               private pagerService: PagerService,
               private dialog: MatDialog,
               private spinnerService: Ng4LoadingSpinnerService,
-              private categoriaService: CategoriaService) {
+              private segmentoService: SegmentoService) {
 	  super();
   }
 
   ngOnInit() {
-    this.categoriaFilter.fgAtivo = 'T';
+    this.segmentoFilter.fgAtivo = 'T';
     this.pesquisar();
   }
 
   visualizar(id) {
-    this.dialog.open(CategoriaViewComponent, {height: '350px',
+    this.dialog.open(SegmentoViewComponent, {height: '350px',
                                                width: '800px', data: {id: id}});
   }
 
   pesquisar(): void {
     this.spinnerService.show();
-    this.categoriaService.pesquisar(this.categoriaFilter)
+    this.segmentoService.pesquisar(this.segmentoFilter)
     .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
       if(this.lista.length > 0) {
@@ -63,12 +63,12 @@ export class CategoriaListComponent extends Base {
 
   inativar(id:string){
     this.spinnerService.show();
-    this.dialogService.confirm('Tem certeza que deseja inativar esta categoria?')
+    this.dialogService.confirm('Tem certeza que deseja inativar este segmento?')
       .then((candelete:boolean) => {
           if(candelete){
             this.message = {};
             let status = 'N';
-            this.categoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
+            this.segmentoService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
                 this.showMessage({
                   type: 'success',
                   text: `O registro foi inativado com sucesso.`
@@ -76,7 +76,7 @@ export class CategoriaListComponent extends Base {
 
                 //ATUALIZANDO STATUS
                 this.lista.forEach(function (value) {
-                  if(value.idCategoria == id) {
+                  if(value.idSegmento == id) {
                     value.fgAtivo = 'N';
                   }
                 });
@@ -95,12 +95,12 @@ export class CategoriaListComponent extends Base {
 
   ativar(id:string){
     this.spinnerService.show();
-    this.dialogService.confirm('Tem certeza que deseja ativar esta categoria?')
+    this.dialogService.confirm('Tem certeza que deseja ativar este segmento?')
       .then((candelete:boolean) => {
           if(candelete){
             this.message = {};
             let status = 'S';
-            this.categoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
+            this.segmentoService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
                 this.showMessage({
                   type: 'success',
                   text: `O registro foi ativado com sucesso.`
@@ -108,7 +108,7 @@ export class CategoriaListComponent extends Base {
 
                 //ATUALIZANDO STATUS
                 this.lista.forEach(function (value) {
-                  if(value.idCategoria == id) {
+                  if(value.idSegmento == id) {
                     value.fgAtivo = 'S';
                   }
                 });
@@ -126,7 +126,7 @@ export class CategoriaListComponent extends Base {
   }
 
   editar(id:string){
-    this.router.navigate(['/categoria-form',id]);
+    this.router.navigate(['/segmento-form',id]);
   }
 
   setPage(page: number) {

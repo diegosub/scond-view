@@ -6,12 +6,19 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { TemplateComponent } from './template/template.component';
 import { HomeComponent } from '../home/home.component';
+
 import { CategoriaListComponent } from '../categoria/list/categoria-list.component';
 import { CategoriaFormComponent } from '../categoria/form/categoria-form.component';
 import { CategoriaViewComponent } from '../categoria/view/categoria-view.component';
+
+import { SegmentoListComponent } from '../segmento/list/segmento-list.component';
+import { SegmentoFormComponent } from '../segmento/form/segmento-form.component';
+import { SegmentoViewComponent } from '../segmento/view/segmento-view.component';
+
 import { FormsModule } from '@angular/forms';
 import { DialogService } from '../../dialog-service';
 import { CategoriaService } from '../../services/categoria/categoria.service';
+import { SegmentoService } from '../../services/segmento/segmento.service';
 import { PagerService } from '../../services/page.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../security/auth.interceptor';
@@ -50,12 +57,16 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenu
         HomeComponent,
         CategoriaListComponent,
         CategoriaFormComponent,
-        CategoriaViewComponent
+        CategoriaViewComponent,
+        SegmentoListComponent,
+        SegmentoFormComponent,
+        SegmentoViewComponent
     ],
     providers: [
       DialogService,
       PagerService,
       CategoriaService,
+      SegmentoService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,

@@ -1,0 +1,53 @@
+<form #form="ngForm" class="form-horizontal" (ngSubmit)="salvar()" novalidate>
+	<fieldset>
+		<legend>Segmento - {{acao}}</legend>
+	  <div class="panel-body">
+			<div [ngClass]="classCss" role="alert" *ngIf="message">
+				<strong>{{ message.text }}</strong>
+			</div>
+
+
+				<fieldset>
+					<div class="form-group">
+							<label class="col-md-2 control-label">Descrição <span style="color: red;"> * </span></label>
+							<div class="col-md-6">
+								<input type="text"
+			          					[(ngModel)]="segmento.dsSegmento"
+			                    name="dsSegmento"
+			                    class="form-control"
+			                    id="inputDsSegmento"
+			                    placeholder="Informe a descrição do segmento"
+			                    #dsSegmento="ngModel"
+			                    required >
+							</div>
+					</div>
+				</fieldset>
+
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Categoria <span style="color: red;"> * </span></label>
+						<div class="col-md-6">
+							<select class="form-control" [(ngModel)]="segmento.idCategoria" name="idCategoria" #idCategoria="ngModel" required>
+								<option value="">- Selecione uma categoria -</option>
+								<option *ngFor="let categoria of listaCategoria" [ngValue]="categoria.idCategoria">{{categoria.dsCategoria}}</option>
+						  </select>
+						</div>
+				</div>
+      </fieldset>
+
+	  </div>
+	</fieldset>
+
+	<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" [disabled]="!form.valid" class="btn btn-primary">
+				{{acao}}
+			</button>
+		  <button class="btn btn-default" [routerLink]="['/segmento-list']">
+				Cancelar
+			</button>
+    </div>
+  </div>
+
+</form>

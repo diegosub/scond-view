@@ -1,26 +1,26 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { Categoria } from '../../../model/categoria';
+import { Segmento } from '../../../model/segmento';
 import { ResponseApi } from '../../../model/response-api';
-import { CategoriaService } from '../../../services/categoria/categoria.service';
+import { SegmentoService } from '../../../services/segmento/segmento.service';
 import { Base } from '../../base/base';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-categoria-view',
-  templateUrl: './categoria-view.component.html',
-  styleUrls: ['./categoria-view.component.css']
+  selector: 'app-segmento-view',
+  templateUrl: './segmento-view.component.html',
+  styleUrls: ['./segmento-view.component.css']
 })
-export class CategoriaViewComponent extends Base {
+export class SegmentoViewComponent extends Base {
 
-  categoria = new Categoria(null,'','','','','');
+  segmento = new Segmento(null,'',null,'','','','');
 
   constructor(private route: ActivatedRoute,
-              private dialogRef: MatDialogRef<CategoriaViewComponent>,
+              private dialogRef: MatDialogRef<SegmentoViewComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private spinnerService: Ng4LoadingSpinnerService,
-              private categoriaService: CategoriaService) {
+              private segmentoService: SegmentoService) {
 	  super();
   }
 
@@ -32,8 +32,8 @@ export class CategoriaViewComponent extends Base {
 
   get(id:string){
     this.spinnerService.show();
-    this.categoriaService.get(id).subscribe((responseApi:ResponseApi) => {
-      this.categoria = responseApi.data;
+    this.segmentoService.get(id).subscribe((responseApi:ResponseApi) => {
+      this.segmento = responseApi.data;
       this.spinnerService.hide();
     } , err => {
       this.showMessage({

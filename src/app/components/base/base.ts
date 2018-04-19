@@ -11,6 +11,9 @@ export class Base implements OnInit {
 
   lista = [];
 
+  pager: any = {};
+  pagedItems: any[];
+
   constructor() {}
 
   ngOnInit(): void {
@@ -19,7 +22,9 @@ export class Base implements OnInit {
 
   getFormGroupClass(isInvalid: boolean, isDirty:boolean): {} {
     return {
-      'form-group': true,
+      'col-md-2' : true,
+      'control-label' : true,
+      //'form-group': true,
       'has-error' : isInvalid  && isDirty,
       'has-success' : !isInvalid  && isDirty
     };

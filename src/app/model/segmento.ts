@@ -1,7 +1,8 @@
-export class Categoria {
+export class Segmento {
     constructor(
-        public idCategoria: Number,
-        public dsCategoria: string,
+        public idSegmento: Number,
+        public dsSegmento: string,
+        public idCategoria: string,
         public fgAtivo: string ,
         public idUsuario: string,
         public dtCadastro: string,

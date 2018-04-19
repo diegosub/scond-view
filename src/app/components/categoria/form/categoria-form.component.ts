@@ -18,9 +18,7 @@ export class CategoriaFormComponent extends Base {
   @ViewChild("form")
   form: NgForm;
 
-  categoria = new Categoria(null,'', '');
-
-  public loading = false;
+  categoria = new Categoria(null,'', '','','','');
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -62,7 +60,7 @@ export class CategoriaFormComponent extends Base {
     this.categoriaService.createOrUpdate(this.categoria).subscribe((responseApi:ResponseApi) => {
         let categoria : Categoria = responseApi.data;
         if(this.route.snapshot.params['id'] == undefined) {
-          this.categoria = new Categoria(null,'','');
+          this.categoria = new Categoria(null,'','','','','');
           this.form.resetForm();
         }
         this.showMessage({
