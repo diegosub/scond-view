@@ -8,6 +8,10 @@ import { CategoriaViewComponent } from '../categoria/view/categoria-view.compone
 import { SegmentoListComponent } from '../segmento/list/segmento-list.component';
 import { SegmentoFormComponent } from '../segmento/form/segmento-form.component';
 import { SegmentoViewComponent } from '../segmento/view/segmento-view.component';
+import { EstabelecimentoListComponent } from '../estabelecimento/list/estabelecimento-list.component';
+import { EstabelecimentoFormComponent } from '../estabelecimento/form/estabelecimento-form.component';
+import { EstabelecimentoViewComponent } from '../estabelecimento/view/estabelecimento-view.component';
+
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -23,6 +27,12 @@ export const CONTENT_ROUTES: Routes = [
         { path : 'segmento-list', component: SegmentoListComponent, canActivate: [AuthGuard] },
         { path : 'segmento-form', component: SegmentoFormComponent, canActivate: [AuthGuard] },
         { path : 'segmento-form/:id', component: SegmentoFormComponent, canActivate: [AuthGuard] },
-        { path : 'segmento-view/:id', component: SegmentoViewComponent, canActivate: [AuthGuard] }
+        { path : 'segmento-view/:id', component: SegmentoViewComponent, canActivate: [AuthGuard] },
+
+        //SEGMENTO
+        { path : 'estabelecimento-list', component: EstabelecimentoListComponent, canActivate: [AuthGuard] },
+        { path : 'estabelecimento-form', component: EstabelecimentoFormComponent, canActivate: [AuthGuard] },
+        { path : 'estabelecimento-form/:id', component: EstabelecimentoFormComponent, canActivate: [AuthGuard] },
+        { path : 'estabelecimento-view/:id', component: EstabelecimentoViewComponent, canActivate: [AuthGuard] }
 
 ]
