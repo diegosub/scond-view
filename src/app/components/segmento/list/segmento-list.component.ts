@@ -19,7 +19,7 @@ import { PagerService } from '../../../services/page.service';
 
 export class SegmentoListComponent extends Base {
 
-  segmentoFilter = new Segmento(null,'',null,'','','','');
+  segmentoFilter = new Segmento(null,'',null,'','','','',null);
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
@@ -37,7 +37,7 @@ export class SegmentoListComponent extends Base {
   }
 
   visualizar(id) {
-    this.dialog.open(SegmentoViewComponent, {height: '350px',
+    this.dialog.open(SegmentoViewComponent, {height: '370px',
                                                width: '800px', data: {id: id}});
   }
 

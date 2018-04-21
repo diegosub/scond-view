@@ -6,6 +6,7 @@ import { ResponseApi } from '../../../model/response-api';
 import { SegmentoService } from '../../../services/segmento/segmento.service';
 import { Base } from '../../base/base';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Categoria } from '../../../model/categoria';
 
 @Component({
   selector: 'app-segmento-view',
@@ -14,7 +15,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class SegmentoViewComponent extends Base {
 
-  segmento = new Segmento(null,'',null,'','','','');
+  segmento = new Segmento(null,'',null,'','','','', new Categoria(null, '','','','',''));
 
   constructor(private route: ActivatedRoute,
               private dialogRef: MatDialogRef<SegmentoViewComponent>,
@@ -25,8 +26,11 @@ export class SegmentoViewComponent extends Base {
   }
 
   ngOnInit() {
+
     if(this.data.id != undefined){
+
       this.get(this.data.id);
+
     }
   }
 

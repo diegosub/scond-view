@@ -1,3 +1,5 @@
+import { Categoria } from "./categoria";
+
 export class Segmento {
     constructor(
         public idSegmento: Number,
@@ -6,6 +8,7 @@ export class Segmento {
         public fgAtivo: string ,
         public idUsuario: string,
         public dtCadastro: string,
-        public dtManutencao: string
+        public dtManutencao: string,
+        public categoria: Categoria
     ){}
 }

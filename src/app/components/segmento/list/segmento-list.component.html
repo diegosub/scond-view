@@ -48,7 +48,8 @@
     <tr>
       <th style="width: 6%; text-align:center;">Código</th>
       <th style="text-align:center;">Descrição</th>
-			<th style="width: 20%;">Situação</th>
+			<th style="width: 20%; text-align:center;">Categoria</th>
+			<th style="width: 10%; text-align:center;">Situação</th>
       <th style="width: 10px;">&nbsp;</th>
       <th style="width: 10px;">&nbsp;</th>
       <th style="width: 10px;">&nbsp;</th>
@@ -56,11 +57,10 @@
     <tr *ngFor="let segmento of pagedItems">
       <td style="text-align:right;">{{segmento.idSegmento}}</td>
       <td>{{segmento.dsSegmento}}</td>
+			<td>{{segmento.categoria.dsCategoria}}</td>
 			<td *ngIf="segmento.fgAtivo == 'S'" style="color: green;">Ativo</td>
 			<td *ngIf="segmento.fgAtivo == 'N'" style="color: red;">Inativo</td>
-
       <td>
-
 				<img src="assets/img/visualizar.png" (click)="visualizar(segmento.idSegmento)" style="width:18px; height: 18px; cursor: pointer;"/>
       </td>
       <td>

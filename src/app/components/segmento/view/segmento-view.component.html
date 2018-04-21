@@ -9,28 +9,33 @@
 
     <div class="form-group">
           <label class="col-sm-3 control-label" style="text-align: right;">Código: </label>
-          {{categoria.idCategoria}}
+          {{segmento.idSegmento}}
     </div>
 
 		<div class="form-group">
   				<label class="col-sm-3 control-label" style="text-align: right;">Descrição: </label>
-				  {{categoria.dsCategoria}}
+				  {{segmento.dsSegmento}}
+    </div>
+
+		<div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Categoria: </label>
+				  {{segmento.categoria.dsCategoria}}
     </div>
 
     <div class="form-group">
   				<label class="col-sm-3 control-label" style="text-align: right;">Situação: </label>
-				  <span *ngIf="categoria.fgAtivo == 'S'">Ativo</span>
-          <span *ngIf="categoria.fgAtivo == 'N'">Inativo</span>
+				  <span *ngIf="segmento.fgAtivo == 'S'">Ativo</span>
+          <span *ngIf="segmento.fgAtivo == 'N'">Inativo</span>
     </div>
 
     <div class="form-group">
   				<label class="col-sm-3 control-label" style="text-align: right;">Data de Cadastro: </label>
-				  {{categoria.dtCadastro | date:'dd/MM/yyyy HH:mm:ss'}}
+				  {{segmento.dtCadastro | date:'dd/MM/yyyy HH:mm:ss'}}
     </div>
 
     <div class="form-group">
   				<label class="col-sm-3 control-label" style="text-align: right;">Data de Manutenção: </label>
-				  {{categoria.dtManutencao | date:'dd/MM/yyyy HH:mm:ss'}}
+				  {{segmento.dtManutencao | date:'dd/MM/yyyy HH:mm:ss'}}
     </div>
 
   </div>

@@ -6,7 +6,7 @@ import { ResponseApi } from '../../../model/response-api';
 import { SegmentoService } from '../../../services/segmento/segmento.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Base } from '../../base/base';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Categoria } from '../../../model/categoria';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
 
@@ -20,7 +20,7 @@ export class SegmentoFormComponent extends Base {
   @ViewChild("form")
   form: NgForm;
 
-  segmento = new Segmento(null,'',null,'','','','');
+  segmento = new Segmento(null,'',null,'','','','',null);
 
   listaCategoria = [];
 
@@ -76,6 +76,7 @@ export class SegmentoFormComponent extends Base {
       });
       this.spinnerService.hide();
     });
+
   }
 
   //SALVAR SEGMENTO
@@ -85,8 +86,9 @@ export class SegmentoFormComponent extends Base {
     this.segmentoService.createOrUpdate(this.segmento).subscribe((responseApi:ResponseApi) => {
         let segmento : Segmento = responseApi.data;
         if(this.route.snapshot.params['id'] == undefined) {
-          this.segmento = new Segmento(null,'',null,'','','','');
+          this.segmento = new Segmento(null,'',null,'','','','',null);
           this.form.resetForm();
+          this.segmento.idCategoria = '';
         }
         this.showMessage({
           type: 'success',
