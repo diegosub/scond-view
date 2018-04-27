@@ -11,7 +11,12 @@ import { SegmentoViewComponent } from '../segmento/view/segmento-view.component'
 import { EstabelecimentoListComponent } from '../estabelecimento/list/estabelecimento-list.component';
 import { EstabelecimentoFormComponent } from '../estabelecimento/form/estabelecimento-form.component';
 import { EstabelecimentoViewComponent } from '../estabelecimento/view/estabelecimento-view.component';
-
+import { CartaoListComponent } from '../cartao/list/cartao-list.component';
+import { CartaoFormComponent } from '../cartao/form/cartao-form.component';
+import { CartaoViewComponent } from '../cartao/view/cartao-view.component';
+import { DespesaListComponent } from '../despesa/list/despesa-list.component';
+import { DespesaFormComponent } from '../despesa/form/despesa-form.component';
+import { DespesaViewComponent } from '../despesa/view/despesa-view.component';
 
 export const CONTENT_ROUTES: Routes = [
 
@@ -33,6 +38,18 @@ export const CONTENT_ROUTES: Routes = [
         { path : 'estabelecimento-list', component: EstabelecimentoListComponent, canActivate: [AuthGuard] },
         { path : 'estabelecimento-form', component: EstabelecimentoFormComponent, canActivate: [AuthGuard] },
         { path : 'estabelecimento-form/:id', component: EstabelecimentoFormComponent, canActivate: [AuthGuard] },
-        { path : 'estabelecimento-view/:id', component: EstabelecimentoViewComponent, canActivate: [AuthGuard] }
+        { path : 'estabelecimento-view/:id', component: EstabelecimentoViewComponent, canActivate: [AuthGuard] },
+
+        //CARTAO
+        { path : 'cartao-list', component: CartaoListComponent, canActivate: [AuthGuard] },
+        { path : 'cartao-form', component: CartaoFormComponent, canActivate: [AuthGuard] },
+        { path : 'cartao-form/:id', component: CartaoFormComponent, canActivate: [AuthGuard] },
+        { path : 'cartao-view/:id', component: CartaoViewComponent, canActivate: [AuthGuard] },
+
+        //DESPESA
+        { path : 'despesa-list', component: DespesaListComponent, canActivate: [AuthGuard] },
+        { path : 'despesa-form', component: DespesaFormComponent, canActivate: [AuthGuard] },
+        { path : 'despesa-form/:id', component: DespesaFormComponent, canActivate: [AuthGuard] },
+        { path : 'despesa-view/:id', component: DespesaViewComponent, canActivate: [AuthGuard] }
 
 ]

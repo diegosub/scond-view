@@ -1,0 +1,139 @@
+<form #form="ngForm" class="form-horizontal" (ngSubmit)="salvar()" novalidate>
+	<fieldset>
+		<legend>Despesa - {{acao}}</legend>
+	  <div class="panel-body">
+			<div [ngClass]="classCss" role="alert" *ngIf="message">
+				<strong>{{ message.text }}</strong>
+			</div>
+
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Segmento <span style="color: red;"> * </span></label>
+						<div class="col-md-6">
+							<select class="form-control" [(ngModel)]="despesa.idSegmento" name="idSegmento" #idSegmento="ngModel" required>
+								<option value="">- Selecione um segmento -</option>
+								<option *ngFor="let segmento of listaSegmento" [ngValue]="segmento.idSegmento">{{segmento.dsSegmento}}</option>
+						  </select>
+						</div>
+				</div>
+      </fieldset>
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Estabelecimento <span style="color: red;"> * </span></label>
+						<div class="col-md-6">
+							<select class="form-control" [(ngModel)]="despesa.idEstabelecimento" name="idEstabelecimento" #idEstabelecimento="ngModel" required>
+								<option value="">- Selecione um estabelecimento -</option>
+								<option *ngFor="let estabelecimento of listaEstabelecimento" [ngValue]="estabelecimento.idEstabelecimento">{{estabelecimento.dsEstabelecimento}}</option>
+						  </select>
+						</div>
+				</div>
+      </fieldset>
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Data da Compra <span style="color: red;"> * </span></label>
+						<div class="col-md-2">
+							<input type="text"
+									   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+										 [(ngModel)]="despesa.dtCompra"
+										 name="dtCompra"
+										 #dtCompra="ngModel"
+										 maxlength="10"
+					           class="form-control"
+										 placeholder="dd/mm/aaaa"
+										 required
+										 style="text-align:right;"
+					           bsDatepicker>
+						</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Valor <span style="color: red;"> * </span></label>
+						<div class="col-md-2">
+							<input type="text"
+		          					[(ngModel)]="despesa.vlDespesa"
+		                    name="vlDespesa"
+		                    class="form-control"
+		                    id="inputVlDespesa"
+		                    placeholder="R$ 00,00"
+		                    #vlDespesa="ngModel"
+												currencyMask
+												maxlength="14"
+												[options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+		                    required/>
+						</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Compra no Cartão? <span style="color: red;"> * </span></label>
+						&nbsp;
+						<div class="col-md-2">
+							<input name="cartao" type="radio" value='S' (click)="resetCartao()" [(ngModel)]="despesa.fgCartao" >Sim&nbsp;&nbsp;
+							<input name="cartao" type="radio" value='N' (click)="resetCartao()" [(ngModel)]="despesa.fgCartao" >Não&nbsp;
+						</div>
+				</div>
+			</fieldset>
+
+			<fieldset *ngIf="despesa.fgCartao == 'S'">
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Cartão <span style="color: red;"> * </span></label>
+						<div class="col-md-6">
+							<select class="form-control" [(ngModel)]="despesa.idCartao" name="idCartao" #idCartao="ngModel">
+								<option value="">- Selecione um cartão -</option>
+								<option *ngFor="let cartao of listaCartao" [ngValue]="cartao.idCartao">{{cartao.dsCartao}}</option>
+						  </select>
+						</div>
+				</div>
+      </fieldset>
+
+			<fieldset *ngIf="despesa.fgCartao == 'S'">
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Mês Referencia <span style="color: red;"> * </span></label>
+						<div class="col-md-4">
+							<select class="form-control" [(ngModel)]="despesa.vlMesCartao" name="vlMesCartao" #vlMesCartao="ngModel" required>
+								<option value="1">Janeiro</option>
+								<option value="2">Fevereiro</option>
+								<option value="3">Março</option>
+								<option value="4">Abril</option>
+								<option value="5">Maio</option>
+								<option value="6">Junho</option>
+								<option value="7">Julho</option>
+								<option value="8">Agosto</option>
+								<option value="9">Setembro</option>
+								<option value="10">Outubro</option>
+								<option value="11">Novembro</option>
+								<option value="12">Dezembro</option>
+						  </select>
+						</div>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-group">
+						<label class="col-md-2 control-label" for="select-1">Observação</label>
+						<div class="col-md-6">
+							<textarea class="form-control" [(ngModel)]="despesa.dsObservacao" maxlength="200" name="dsObservacao" #dsObservacao="ngModel" placeholder="Digite alguma observação, se existir." rows="3"></textarea>
+						</div>
+				</div>
+			</fieldset>
+
+		</div>
+	</fieldset>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" [disabled]="!form.valid" class="btn btn-primary">
+				{{acao}}
+			</button>
+		  <button class="btn btn-default" [routerLink]="['/despesa-list']">
+				Cancelar
+			</button>
+		</div>
+	</div>
+</form>

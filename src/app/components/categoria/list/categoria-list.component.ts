@@ -62,10 +62,10 @@ export class CategoriaListComponent extends Base {
   }
 
   inativar(id:string){
-    this.spinnerService.show();
     this.dialogService.confirm('Tem certeza que deseja inativar esta categoria?')
       .then((candelete:boolean) => {
           if(candelete){
+            this.spinnerService.show();
             this.message = {};
             let status = 'N';
             this.categoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
@@ -94,10 +94,10 @@ export class CategoriaListComponent extends Base {
   }
 
   ativar(id:string){
-    this.spinnerService.show();
     this.dialogService.confirm('Tem certeza que deseja ativar esta categoria?')
       .then((candelete:boolean) => {
           if(candelete){
+            this.spinnerService.show();
             this.message = {};
             let status = 'S';
             this.categoriaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {

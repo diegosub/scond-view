@@ -62,10 +62,10 @@ export class EstabelecimentoListComponent extends Base {
   }
 
   inativar(id:string){
-    this.spinnerService.show();
     this.dialogService.confirm('Tem certeza que deseja inativar este estabelecimento?')
       .then((candelete:boolean) => {
           if(candelete){
+            this.spinnerService.show();
             this.message = {};
             let status = 'N';
             this.estabelecimentoService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
@@ -94,10 +94,10 @@ export class EstabelecimentoListComponent extends Base {
   }
 
   ativar(id:string){
-    this.spinnerService.show();
     this.dialogService.confirm('Tem certeza que deseja ativar este estabelecimento?')
       .then((candelete:boolean) => {
           if(candelete){
+            this.spinnerService.show();
             this.message = {};
             let status = 'S';
             this.estabelecimentoService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {

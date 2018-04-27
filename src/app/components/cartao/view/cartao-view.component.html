@@ -1,0 +1,43 @@
+
+<fieldset>
+	<legend>Cartão - Visualizar</legend>
+  <div class="panel-body">
+		<div [ngClass]="classCss" role="alert" *ngIf="message">
+			<strong>{{ message.text }}</strong>
+		</div>
+
+
+    <div class="form-group">
+          <label class="col-sm-3 control-label" style="text-align: right;">Código: </label>
+          {{cartao.idCartao}}
+    </div>
+
+		<div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Descrição: </label>
+				  {{cartao.dsCartao}}
+    </div>
+
+    <div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Situação: </label>
+				  <span *ngIf="cartao.fgAtivo == 'S'">Ativo</span>
+          <span *ngIf="cartao.fgAtivo == 'N'">Inativo</span>
+    </div>
+
+    <div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Data de Cadastro: </label>
+				  {{cartao.dtCadastro | date:'dd/MM/yyyy HH:mm:ss'}}
+    </div>
+
+    <div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Data de Manutenção: </label>
+				  {{cartao.dtManutencao | date:'dd/MM/yyyy HH:mm:ss'}}
+    </div>
+
+  </div>
+</fieldset>
+
+<div style="text-align:right;">
+  <button class="btn btn-default" (click)="fechar()">
+		Fechar
+	</button>
+</div>

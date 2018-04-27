@@ -1,0 +1,91 @@
+<fieldset>
+	<legend>Despesa - Pesquisar</legend>
+  <div class="panel-body">
+
+		<div [ngClass]="classCss" role="alert" *ngIf="message">
+	    <strong>{{ message.text }}</strong>
+	  </div>
+
+		<form action="">
+  		<fieldset>
+
+				<div class="form-group" style="width:60%">
+  				<label>Situação </label>
+					&nbsp;
+					<input name="situacao" type="radio" value='T'  [(ngModel)]="despesaFilter.fgAtivo" >Todos&nbsp;
+					<input name="situacao" type="radio" value='S'  [(ngModel)]="despesaFilter.fgAtivo" >Ativos&nbsp;
+					<input name="situacao" type="radio" value='N'  [(ngModel)]="despesaFilter.fgAtivo" >Inativos&nbsp;
+  			</div>
+
+      </fieldset>
+    </form>
+  </div>
+</fieldset>
+
+	<div style="padding-left:15px;">
+	  <button type="submit" class="btn btn-primary" (click) = "pesquisar()">
+			Pesquisar
+		</button>
+	  <button class="btn btn-primary" [routerLink]="['/despesa-form']">
+			Novo
+		</button>
+	</div>
+<div>
+
+<div class="panel-body">
+  <table class="table table-responsive table-striped table-bordered table-hover no-margin" *ngIf="lista.length>0">
+    <tr>
+      <th style="width: 6%; text-align:center;">Código</th>
+			<th style="width: 20%;">Situação</th>
+      <th style="width: 10px;">&nbsp;</th>
+      <th style="width: 10px;">&nbsp;</th>
+      <th style="width: 10px;">&nbsp;</th>
+    </tr>
+    <tr *ngFor="let despesa of pagedItems">
+      <td style="text-align:right;">{{despesa.idDespesa}}</td>
+			<td *ngIf="despesa.fgAtivo == 'S'" style="color: green;">Ativo</td>
+			<td *ngIf="despesa.fgAtivo == 'N'" style="color: red;">Inativo</td>
+
+      <td>
+				<img src="assets/img/visualizar.png" (click)="visualizar(despesa.idDespesa)" style="width:18px; height: 18px; cursor: pointer;"/>
+      </td>
+      <td>
+        <img src="assets/img/edit.png" (click)="editar(despesa.idDespesa)" style="width:18px; height: 18px; cursor: pointer;" />
+      </td>
+      <td>
+				<img *ngIf="despesa.fgAtivo == 'S'" src="assets/img/remove.png" (click)="inativar(despesa.idDespesa)" style="width:18px; height: 18px; cursor: pointer;"/>
+				<img *ngIf="despesa.fgAtivo == 'N'" src="assets/img/ativar.png" (click)="ativar(despesa.idDespesa)" style="width:18px; height: 18px; cursor: pointer;"/>
+			</td>
+    </tr>
+  </table>
+</div>
+
+<div style="text-align:center;">
+	<div style="padding-left:15px; padding-right: 15px; text-align: right; vertical-align: botton; font-size: 11px; color:gray;">
+	  <span *ngIf="lista.length == 1">Foi encontrado {{lista.length}} registro.</span>
+		<span *ngIf="lista.length > 1">Foram encontrados {{lista.length}} registros.</span>
+	</div>
+
+	<ul *ngIf="pager.pages && pager.pages.length && lista.length>0" class="pagination" style="font-size:10px; cursor: pointer;">
+	    <li [ngClass]="{disabled:pager.currentPage === 1}">
+	        <a (click)="setPage(1)"><b><<</b></a>
+	    </li>
+	    <li [ngClass]="{disabled:pager.currentPage === 1}">
+	        <a (click)="setPage(pager.currentPage - 1)"><</a>
+	    </li>
+	    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+	        <a (click)="setPage(page)">{{page}}</a>
+	    </li>
+	    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+	        <a (click)="setPage(pager.currentPage + 1)">></a>
+	    </li>
+	    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+	        <a (click)="setPage(pager.totalPages)"> >> </a>
+	    </li>
+	</ul>
+
+	<div style="text-align: center;" *ngIf="lista.length<=0">
+		Sua consulta não gerou resultados.
+	</div>
+
+</div>

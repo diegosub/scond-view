@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../../../dialog-service';
-import { SegmentoService } from '../../../services/segmento/segmento.service';
-import { Segmento } from '../../../model/segmento';
 import { Base } from '../../base/base';
 import { ResponseApi } from '../../../model/response-api';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { SegmentoViewComponent } from '../view/segmento-view.component';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { PagerService } from '../../../services/page.service';
+import { Despesa } from '../../../model/despesa';
+import { DespesaService } from '../../../services/despesa/despesa.service';
+import { DespesaViewComponent } from '../view/despesa-view.component';
 
 
 @Component({
-  selector: 'app-segmento-list',
-  templateUrl: './segmento-list.component.html',
-  styleUrls: ['./segmento-list.component.css']
+  selector: 'app-despesa-list',
+  templateUrl: './despesa-list.component.html',
+  styleUrls: ['./despesa-list.component.css']
 })
 
-export class SegmentoListComponent extends Base {
+export class DespesaListComponent extends Base {
 
-  segmentoFilter = new Segmento(null,'',null,'','','','',null);
+  despesaFilter = new Despesa(null,'','','','','',null,'','','','','','','');
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
@@ -27,23 +27,23 @@ export class SegmentoListComponent extends Base {
               private pagerService: PagerService,
               private dialog: MatDialog,
               private spinnerService: Ng4LoadingSpinnerService,
-              private segmentoService: SegmentoService) {
+              private despesaService: DespesaService) {
 	  super();
   }
 
   ngOnInit() {
-    this.segmentoFilter.fgAtivo = 'T';
+    this.despesaFilter.fgAtivo = 'T';
     this.pesquisar();
   }
 
   visualizar(id) {
-    this.dialog.open(SegmentoViewComponent, {height: '370px',
+    this.dialog.open(DespesaViewComponent, {height: '350px',
                                                width: '800px', data: {id: id}});
   }
 
   pesquisar(): void {
     this.spinnerService.show();
-    this.segmentoService.pesquisar(this.segmentoFilter)
+    this.despesaService.pesquisar(this.despesaFilter)
     .subscribe((responseApi:ResponseApi) => {
       this.lista = responseApi['data'];
       if(this.lista.length > 0) {
@@ -62,13 +62,13 @@ export class SegmentoListComponent extends Base {
   }
 
   inativar(id:string){
-    this.dialogService.confirm('Tem certeza que deseja inativar este segmento?')
+    this.dialogService.confirm('Tem certeza que deseja inativar esta despesa?')
       .then((candelete:boolean) => {
           if(candelete){
             this.spinnerService.show();
             this.message = {};
             let status = 'N';
-            this.segmentoService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
+            this.despesaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
                 this.showMessage({
                   type: 'success',
                   text: `O registro foi inativado com sucesso.`
@@ -76,7 +76,7 @@ export class SegmentoListComponent extends Base {
 
                 //ATUALIZANDO STATUS
                 this.lista.forEach(function (value) {
-                  if(value.idSegmento == id) {
+                  if(value.idDespesa == id) {
                     value.fgAtivo = 'N';
                   }
                 });
@@ -94,13 +94,13 @@ export class SegmentoListComponent extends Base {
   }
 
   ativar(id:string){
-    this.dialogService.confirm('Tem certeza que deseja ativar este segmento?')
+    this.dialogService.confirm('Tem certeza que deseja ativar este cartão?')
       .then((candelete:boolean) => {
           if(candelete){
             this.spinnerService.show();
             this.message = {};
             let status = 'S';
-            this.segmentoService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
+            this.despesaService.ativarInativar(id, status).subscribe((responseApi:ResponseApi) => {
                 this.showMessage({
                   type: 'success',
                   text: `O registro foi ativado com sucesso.`
@@ -108,7 +108,7 @@ export class SegmentoListComponent extends Base {
 
                 //ATUALIZANDO STATUS
                 this.lista.forEach(function (value) {
-                  if(value.idSegmento == id) {
+                  if(value.idDespesa == id) {
                     value.fgAtivo = 'S';
                   }
                 });
@@ -126,7 +126,7 @@ export class SegmentoListComponent extends Base {
   }
 
   editar(id:string){
-    this.router.navigate(['/segmento-form',id]);
+    this.router.navigate(['/despesa-form',id]);
   }
 
   setPage(page: number) {
