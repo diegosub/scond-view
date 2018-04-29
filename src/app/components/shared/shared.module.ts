@@ -43,6 +43,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@angular/material';
+import { CdtecSoNumberDirective } from '../../diretivas/cdtec-so-number.directive';
 
 
 
@@ -90,6 +91,7 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatMenu
         DespesaListComponent,
         DespesaFormComponent,
         DespesaViewComponent,
+        CdtecSoNumberDirective
     ],
     providers: [
       DialogService,

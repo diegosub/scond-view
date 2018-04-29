@@ -19,7 +19,9 @@ import { DespesaViewComponent } from '../view/despesa-view.component';
 
 export class DespesaListComponent extends Base {
 
-  despesaFilter = new Despesa(null,'','','','','',null,'','','','','','','');
+  despesaFilter = new Despesa(null,'','','','',null,null,null,null,'','','','','',null,null,null,null,'');
+
+  v: number;
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
@@ -37,7 +39,7 @@ export class DespesaListComponent extends Base {
   }
 
   visualizar(id) {
-    this.dialog.open(DespesaViewComponent, {height: '350px',
+    this.dialog.open(DespesaViewComponent, {height: '580px',
                                                width: '800px', data: {id: id}});
   }
 
@@ -123,6 +125,11 @@ export class DespesaListComponent extends Base {
             });
           }
       });
+  }
+
+  soNumeros(){
+    alert(this.v);
+    //return v.replace(/\D/g,"") //Remove tudo o que não é dígito
   }
 
   editar(id:string){

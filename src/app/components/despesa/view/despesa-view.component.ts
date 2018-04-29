@@ -6,6 +6,9 @@ import { Base } from '../../base/base';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Despesa } from '../../../model/despesa';
 import { DespesaService } from '../../../services/despesa/despesa.service';
+import { Segmento } from '../../../model/segmento';
+import { Categoria } from '../../../model/categoria';
+import { Estabelecimento } from '../../../model/estabelecimento';
 
 
 @Component({
@@ -15,7 +18,11 @@ import { DespesaService } from '../../../services/despesa/despesa.service';
 })
 export class DespesaViewComponent extends Base {
 
-  despesa = new Despesa(null,'','','','','',null,'','','','','','','');
+  despesa = new Despesa(null,'','','','',
+                        null,null,null,null,
+                        '','','','','',
+                        new Segmento(null,'',null,'','','','', new Categoria(null, '','','','','')),
+                        new Estabelecimento(null,'','','','',''),null,null,'');
 
   constructor(private route: ActivatedRoute,
               private dialogRef: MatDialogRef<DespesaViewComponent>,

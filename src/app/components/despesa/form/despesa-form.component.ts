@@ -24,7 +24,7 @@ export class DespesaFormComponent extends Base {
   @ViewChild("form")
   form: NgForm;
 
-  despesa = new Despesa(null,'','','','','',null,'','','','','','','');
+  despesa = new Despesa(null,'','','','',null,null,null,null,'','','','','',null,null,null,null,'');
   listaSegmento = [];
   listaEstabelecimento = [];
   listaCartao = [];
@@ -46,10 +46,7 @@ export class DespesaFormComponent extends Base {
     this.popularListaSegmento();
     this.popularListaEstabelecimento();
     this.popularListaCartao();
-    this.despesa.idSegmento = '';
-    this.despesa.fgCartao = 'S';
-    this.despesa.dtCompra = new Date();
-    this.despesa.vlMesCartao = new Date().getMonth()+1+"";
+    this.resetDespesa();
 
     if(id != undefined) {
       this.acao = 'Alterar';
@@ -57,6 +54,13 @@ export class DespesaFormComponent extends Base {
     } else {
       this.acao = 'Cadastrar';
     }
+  }
+
+  resetDespesa() {
+    this.despesa.idSegmento = '';
+    this.despesa.fgCartao = 'S';
+    this.despesa.dtCompra = new Date();
+    this.despesa.vlMesCartao = new Date().getMonth()+1+"";
   }
 
   //POPULAR LISTA DE SEGMENTOS ATIVOS
@@ -137,12 +141,12 @@ export class DespesaFormComponent extends Base {
         });
         this.spinnerService.hide();
     } else {
-        //GRAVAR        
+        //GRAVAR
         this.despesaService.createOrUpdate(this.despesa).subscribe((responseApi:ResponseApi) => {
             let despesa : Despesa = responseApi.data;
             if(this.route.snapshot.params['id'] == undefined) {
-              this.despesa = new Despesa(null,'','','','','',null,'','','','','','','');
-              this.form.resetForm();
+              this.despesa = new Despesa(null,'','','','',null,null,null,null,'','','','','',null,null,null,null,'');
+              this.resetDespesa();
             }
             this.showMessage({
               type: 'success',

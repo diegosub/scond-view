@@ -12,7 +12,43 @@
           {{despesa.idDespesa}}
     </div>
 
-    <div class="form-group">
+		<div class="form-group">
+					<label class="col-sm-3 control-label" style="text-align: right;">Segmento: </label>
+					{{despesa.segmento.dsSegmento}}
+		</div>
+
+		<div class="form-group">
+          <label class="col-sm-3 control-label" style="text-align: right;">Estabelecimento: </label>
+          {{despesa.estabelecimento.dsEstabelecimento}}
+    </div>
+
+		<div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Data da Compra: </label>
+				  {{despesa.dtCompra | date:'dd/MM/yyyy'}}
+    </div>
+
+		<div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Valor: </label>
+					{{despesa.vlDespesa}}
+    </div>
+
+		<div class="form-group">
+					<label class="col-sm-3 control-label" style="text-align: right;">Compra no Cartão? </label>
+					<span *ngIf="despesa.fgCartao == 'S'">Sim</span>
+					<span *ngIf="despesa.fgCartao == 'N'">Não</span>
+		</div>
+
+		<div class="form-group" *ngIf="despesa.fgCartao == 'S'">
+					<label class="col-sm-3 control-label" style="text-align: right;">Cartão </label>
+					{{despesa.cartao.dsCartao}}
+		</div>
+
+		<div class="form-group" *ngIf="despesa.fgCartao == 'S'">
+					<label class="col-sm-3 control-label" style="text-align: right;">Mês Referência </label>
+					{{despesa.vlMesCartao}}
+		</div>
+
+		<div class="form-group">
   				<label class="col-sm-3 control-label" style="text-align: right;">Situação: </label>
 				  <span *ngIf="despesa.fgAtivo == 'S'">Ativo</span>
           <span *ngIf="despesa.fgAtivo == 'N'">Inativo</span>
@@ -26,6 +62,16 @@
     <div class="form-group">
   				<label class="col-sm-3 control-label" style="text-align: right;">Data de Manutenção: </label>
 				  {{despesa.dtManutencao | date:'dd/MM/yyyy HH:mm:ss'}}
+    </div>
+
+		<div class="form-group">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Data de Referência: </label>
+				  {{despesa.dtReferencia | date:'dd/MM/yyyy HH:mm:ss'}}
+    </div>
+
+		<div class="form-group" *ngIf="despesa.dsObservacao != ''">
+  				<label class="col-sm-3 control-label" style="text-align: right;">Observação: </label>
+				  {{despesa.dsObservacao}}
     </div>
 
   </div>
