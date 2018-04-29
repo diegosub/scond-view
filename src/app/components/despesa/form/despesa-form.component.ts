@@ -118,6 +118,7 @@ export class DespesaFormComponent extends Base {
     this.spinnerService.show();
     this.despesaService.get(id).subscribe((responseApi:ResponseApi) => {
       this.despesa = responseApi.data;
+      this.despesa.dtCompra = new Date(this.despesa.dtCompra);
       this.spinnerService.hide();
     } , err => {
       this.showMessage({
