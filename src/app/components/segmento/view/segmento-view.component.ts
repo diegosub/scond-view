@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Segmento } from '../../../model/segmento';
 import { ResponseApi } from '../../../model/response-api';
@@ -21,8 +21,9 @@ export class SegmentoViewComponent extends Base {
               private dialogRef: MatDialogRef<SegmentoViewComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private spinnerService: Ng4LoadingSpinnerService,
+              public router: Router,
               private segmentoService: SegmentoService) {
-	  super();
+	  super(router);
   }
 
   ngOnInit() {

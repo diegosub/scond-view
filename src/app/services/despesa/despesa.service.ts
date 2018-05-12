@@ -18,7 +18,7 @@ export class DespesaService {
     }
   }
 
-  pesquisar(despesa: Despesa){
+  pesquisar(despesa: Despesa){    
     return this.http.post(`${HOST_SCOND}/api/despesa/pesquisar`, despesa);
   }
 

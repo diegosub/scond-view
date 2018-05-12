@@ -23,12 +23,12 @@ export class SegmentoListComponent extends Base {
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private pagerService: PagerService,
               private dialog: MatDialog,
               private spinnerService: Ng4LoadingSpinnerService,
               private segmentoService: SegmentoService) {
-	  super();
+	  super(router);
   }
 
   ngOnInit() {

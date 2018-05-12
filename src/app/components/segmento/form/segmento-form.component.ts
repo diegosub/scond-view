@@ -25,12 +25,12 @@ export class SegmentoFormComponent extends Base {
   listaCategoria = [];
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private _location: Location,
               private spinnerService: Ng4LoadingSpinnerService,
               private categoriaService: CategoriaService,
               private segmentoService: SegmentoService) {
-        super();
+        super(router);
   }
 
   ngOnInit() {

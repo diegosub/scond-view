@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ResponseApi } from '../../../model/response-api';
 import { Base } from '../../base/base';
@@ -28,8 +28,9 @@ export class DespesaViewComponent extends Base {
               private dialogRef: MatDialogRef<DespesaViewComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private spinnerService: Ng4LoadingSpinnerService,
+              public router: Router,
               private despesaService: DespesaService) {
-	  super();
+	  super(router);
   }
 
   ngOnInit() {

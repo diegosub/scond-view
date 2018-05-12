@@ -21,11 +21,11 @@ export class CategoriaFormComponent extends Base {
   categoria = new Categoria(null,'', '','','','');
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private _location: Location,
               private spinnerService: Ng4LoadingSpinnerService,
               private categoriaService: CategoriaService) {
-        super();
+        super(router);
   }
 
   ngOnInit() {
@@ -45,11 +45,11 @@ export class CategoriaFormComponent extends Base {
       this.categoria = responseApi.data;
       this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -69,11 +69,11 @@ export class CategoriaFormComponent extends Base {
         });
         this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'danger',
         text: err['error']['errors'][0]
-      });
-      this.spinnerService.hide();
+      });      
     });
   }
 

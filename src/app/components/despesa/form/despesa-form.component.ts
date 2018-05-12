@@ -30,14 +30,14 @@ export class DespesaFormComponent extends Base {
   listaCartao = [];
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private _location: Location,
               private spinnerService: Ng4LoadingSpinnerService,
               private despesaService: DespesaService,
               private estabelecimentoService: EstabelecimentoService,
               private cartaoService: CartaoService,
               private segmentoService: SegmentoService) {
-        super();
+        super(router);
   }
 
   ngOnInit() {
@@ -72,11 +72,11 @@ export class DespesaFormComponent extends Base {
         this.listaSegmento = responseApi['data'];
         this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'danger',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -89,11 +89,11 @@ export class DespesaFormComponent extends Base {
         this.listaEstabelecimento = responseApi['data'];
         this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'danger',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -106,11 +106,11 @@ export class DespesaFormComponent extends Base {
         this.listaCartao = responseApi['data'];
         this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'danger',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -121,11 +121,11 @@ export class DespesaFormComponent extends Base {
       this.despesa.dtCompra = new Date(this.despesa.dtCompra);
       this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -155,11 +155,11 @@ export class DespesaFormComponent extends Base {
             });
             this.spinnerService.hide();
         } , err => {
+          this.spinnerService.hide();
           this.showMessage({
             type: 'danger',
             text: err['error']['errors'][0]
-          });
-          this.spinnerService.hide();
+          });          
         });
     }
   }

@@ -14,7 +14,7 @@ export class Base implements OnInit {
   pager: any = {};
   pagedItems: any[];
 
-  constructor() {}
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
 
@@ -43,6 +43,12 @@ export class Base implements OnInit {
       'alert': true
     }
     this.classCss['alert-'+type] =  true;
+  }
+
+  logout() {
+    localStorage.removeItem("usuario");
+    localStorage.removeItem("token");
+    this.router.navigate(['/login']);
   }
 
 }

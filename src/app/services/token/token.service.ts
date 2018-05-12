@@ -8,11 +8,8 @@ export class TokenService {
 
   constructor(private http: HttpClient) {}
 
-  validateAuthenticationToken(login: string){
-
-    let token = localStorage.getItem("token");
+  validateAuthenticationToken(login: string, token: string){
     let headers = new HttpHeaders().set('Authorization', token);
-
     return this.http.post(`${HOST_SCOND}/api/validate`, login, {headers});
   }
 

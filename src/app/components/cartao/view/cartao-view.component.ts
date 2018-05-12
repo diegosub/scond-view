@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ResponseApi } from '../../../model/response-api';
 import { Base } from '../../base/base';
@@ -20,8 +20,9 @@ export class CartaoViewComponent extends Base {
               private dialogRef: MatDialogRef<CartaoViewComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private spinnerService: Ng4LoadingSpinnerService,
+              public router: Router,
               private cartaoService: CartaoService) {
-	  super();
+	  super(router);
   }
 
   ngOnInit() {
@@ -36,11 +37,11 @@ export class CartaoViewComponent extends Base {
       this.cartao = responseApi.data;
       this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 

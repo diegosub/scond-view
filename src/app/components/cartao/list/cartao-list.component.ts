@@ -23,12 +23,12 @@ export class CartaoListComponent extends Base {
 
   constructor(private dialogService: DialogService,
               private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private pagerService: PagerService,
               private dialog: MatDialog,
               private spinnerService: Ng4LoadingSpinnerService,
               private cartaoService: CartaoService) {
-	  super();
+	  super(router);
   }
 
   ngOnInit() {
@@ -53,11 +53,11 @@ export class CartaoListComponent extends Base {
       }
       this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -83,11 +83,11 @@ export class CartaoListComponent extends Base {
 
                 this.spinnerService.hide();
             } , err => {
+              this.spinnerService.hide();
               this.showMessage({
                 type: 'error',
                 text: err['error']['errors'][0]
               });
-              this.spinnerService.hide();
             });
           }
       });
@@ -115,11 +115,11 @@ export class CartaoListComponent extends Base {
 
                 this.spinnerService.hide();
             } , err => {
+              this.spinnerService.hide();
               this.showMessage({
                 type: 'error',
                 text: err['error']['errors'][0]
               });
-              this.spinnerService.hide();
             });
           }
       });

@@ -21,11 +21,11 @@ export class EstabelecimentoFormComponent extends Base {
   estabelecimento = new Estabelecimento(null,'', '','','','');
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
+              public router: Router,
               private _location: Location,
               private spinnerService: Ng4LoadingSpinnerService,
               private estabelecimentoService: EstabelecimentoService) {
-        super();
+        super(router);
   }
 
   ngOnInit() {
@@ -45,11 +45,11 @@ export class EstabelecimentoFormComponent extends Base {
       this.estabelecimento = responseApi.data;
       this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 
@@ -69,11 +69,11 @@ export class EstabelecimentoFormComponent extends Base {
         });
         this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'danger',
         text: err['error']['errors'][0]
-      });
-      this.spinnerService.hide();
+      });      
     });
   }
 

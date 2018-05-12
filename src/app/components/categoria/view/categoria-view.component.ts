@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Categoria } from '../../../model/categoria';
 import { ResponseApi } from '../../../model/response-api';
@@ -20,8 +20,9 @@ export class CategoriaViewComponent extends Base {
               private dialogRef: MatDialogRef<CategoriaViewComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private spinnerService: Ng4LoadingSpinnerService,
+              public router: Router,
               private categoriaService: CategoriaService) {
-	  super();
+	  super(router);
   }
 
   ngOnInit() {
@@ -36,11 +37,11 @@ export class CategoriaViewComponent extends Base {
       this.categoria = responseApi.data;
       this.spinnerService.hide();
     } , err => {
+      this.spinnerService.hide();
       this.showMessage({
         type: 'error',
         text: err['error']['errors'][0]
       });
-      this.spinnerService.hide();
     });
   }
 

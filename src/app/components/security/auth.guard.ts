@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Route, Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad } from '@angular/router';
-import { TokenService } from '../../services/token/token.service';
 import { UtilService } from '../../services/util.service';
 
 
@@ -10,8 +9,7 @@ export class AuthGuard implements CanActivate {
 
   util : UtilService;
 
-  constructor(private tokenService: TokenService,
-              private router: Router) {
+  constructor(private router: Router) {
       this.util = UtilService.getInstance();
   }
 
@@ -24,26 +22,6 @@ export class AuthGuard implements CanActivate {
 
     this.router.navigate(['/login']);
     return false;
-  }
-
-  validateToken():boolean {
-    let login = JSON.parse(localStorage.getItem("usuario")).dsLogin;
-    alert(login);
-
-    if(login != null) {
-      this.tokenService.validateAuthenticationToken(login)
-        .subscribe(() => {
-          alert();
-          return true;
-        } , err => {
-          alert('false1');
-          return false;
-        });
-    } else {
-      alert('false2');
-      return false;
-    }
-
   }
 
 }
